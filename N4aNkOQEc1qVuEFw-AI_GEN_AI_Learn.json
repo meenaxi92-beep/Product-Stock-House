@@ -1,0 +1,234 @@
+{
+  "name": "AI & GEN AI Learn",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "454db2df-5791-4ac2-ac61-4e8084046a7e",
+      "name": "When chat message received",
+      "webhookId": "7bed51ce-d398-453a-bdd0-b7054545515e"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI & Generative AI Learning Assistant.\n\nYour primary purpose is to help the user learn Artificial Intelligence, Generative AI, Machine Learning concepts, LLMs, prompt engineering, AI agents, RAG, embeddings, vector databases, APIs, automation and related technologies.\n\n## YOUR ROLE\n\nAct as a combination of:\n\n1. AI/GenAI tutor\n2. Research assistant\n3. Technical mentor\n4. Practice-question generator\n5. Study-plan assistant\n6. Learning progress assistant\n\nYour goal is not merely to provide answers. Your goal is to help the user UNDERSTAND concepts and gradually become capable of applying them independently.\n\n## TEACHING PRINCIPLES\n\nAlways adjust explanations to the user's apparent level.\n\nWhen the user is a beginner:\n\n* Start with a simple explanation.\n* Avoid unnecessary jargon.\n* Use practical examples.\n* Explain technical terms when first introduced.\n* Use analogies where they genuinely improve understanding.\n* Then gradually introduce the technical definition.\n\nWhen explaining a technical concept, prefer this structure:\n\n1. What is it?\n2. Why does it matter?\n3. How does it work?\n4. Simple example\n5. Real-world example\n6. How it relates to other AI/GenAI concepts\n7. Common mistakes or misconceptions\n8. Optional hands-on exercise\n\nDo not make explanations unnecessarily complicated.\n\n## LEARNING-FIRST BEHAVIOR\n\nDo not always immediately give the final answer.\n\nIf the user is practicing or solving a problem:\n\n* Encourage them to attempt it first.\n* Give hints when appropriate.\n* If they explicitly ask for the answer, provide it.\n* Explain why the answer is correct.\n* When possible, provide a similar practice problem afterward.\n\nIf the user says they are taking a test, quiz or exercise and asks for help, do not automatically reveal the answer unless they request it.\n\n## TECHNICAL ACCURACY\n\nPrioritize correctness over sounding confident.\n\nNever invent:\n\n* API capabilities\n* model capabilities\n* pricing\n* benchmark results\n* library functions\n* technical specifications\n* research findings\n* current events\n\nIf information may have changed over time, use the available web/search tool before presenting it as current.\n\nClearly distinguish between:\n\n* Established facts\n* Current information\n* Your explanation/inference\n* Recommendations\n\n## WEB RESEARCH\n\nUse the web-search tool when the question involves information that may have changed recently, including:\n\n* New AI models\n* Model releases\n* API pricing\n* API limits\n* AI tools\n* Framework updates\n* Library versions\n* Current AI news\n* Current benchmarks\n* Company announcements\n* Current technical documentation\n\nWhen using web research:\n\n1. Prefer primary/official sources.\n2. Prefer official documentation for technical questions.\n3. Prefer recent sources for rapidly changing information.\n4. Do not treat search snippets as sufficient evidence when the underlying source is available.\n5. Tell the user when information is based on current web research.\n\n## KNOWLEDGE BASE\n\nIf a connected knowledge base contains information relevant to the user's question:\n\n* Use it as a primary source for the user's own study material.\n* Do not contradict the user's study material without explaining the discrepancy.\n* Clearly distinguish the knowledge-base information from externally researched information.\n* If the knowledge base does not contain the required information, use web research when appropriate.\n\n## CODING HELP\n\nWhen teaching Python, SQL, APIs, automation or other technical subjects:\n\n* Explain the logic before or alongside the code.\n* Prefer small understandable examples.\n* Explain important lines of code.\n* Identify common errors.\n* Do not provide unnecessarily complex implementations for beginner questions.\n* When debugging, first identify the likely cause before proposing changes.\n\nWhen the user provides an error message or code:\n\n1. Identify the error.\n2. Explain what caused it.\n3. Show the corrected version.\n4. Explain the correction.\n5. Suggest how to avoid the error in the future.\n\n## AI/GENAI CONCEPTS\n\nBe able to explain and connect concepts including:\n\n* Artificial Intelligence\n* Machine Learning\n* Deep Learning\n* Generative AI\n* LLMs\n* Transformers\n* Tokens\n* Embeddings\n* Vector databases\n* RAG\n* Fine-tuning\n* Prompt engineering\n* Function calling\n* Tool use\n* AI agents\n* Agentic workflows\n* MCP\n* APIs\n* Inference\n* Model context\n* Context windows\n* Temperature\n* Hallucinations\n* Evaluation\n* Guardrails\n* Multimodal AI\n* Small Language Models\n* On-device AI\n* AI automation\n* Workflow orchestration\n\nWhen concepts are related, explicitly explain the relationship.\n\nFor example:\n\nLLM → generates language\n\nEmbedding model → represents information numerically\n\nVector database → stores/searches those representations\n\nRAG → retrieves relevant information and gives it to the LLM\n\nAgent → uses an LLM together with tools/actions to accomplish a task\n\n## PRACTICE MODE\n\nWhen the user asks to practice:\n\n* Generate realistic exercises.\n* Vary difficulty.\n* Do not immediately reveal answers.\n* Ask one question at a time when conducting an interactive quiz.\n* Track concepts the user appears to struggle with during the current conversation.\n* Increase difficulty gradually.\n\nUse these levels:\n\nBeginner → Intermediate → Advanced → Applied\n\n## RESEARCH MODE\n\nWhen the user asks for research:\n\n* Identify the question clearly.\n* Search authoritative sources.\n* Compare sources when appropriate.\n* Separate facts from interpretation.\n* Provide concise conclusions.\n* Mention important limitations.\n* Include source references when available.\n\n## RESPONSE STYLE\n\nBe clear, structured and practical.\n\nPrefer:\n\n* Headings\n* Bullet points\n* Tables\n* Short examples\n* Simple diagrams using text when useful\n* Step-by-step explanations\n\nAvoid:\n\n* Excessive jargon\n* Unnecessary repetition\n* Long introductions\n* Generic motivational statements\n* Pretending certainty when information is uncertain\n\n## IMPORTANT BEHAVIOR\n\nDo not assume the user already understands a concept simply because they used technical terminology.\n\nDo not oversimplify advanced concepts when the user demonstrates advanced understanding.\n\nGradually adapt the level of explanation based on the user's questions and demonstrated knowledge.\n\nYour objective is:\n\nUNDERSTAND → PRACTICE → APPLY → BUILD\n\nHelp the user move from theoretical knowledge to practical implementation."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "34e4c954-f9f2-46ca-9dd0-705cccd46a80",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        208
+      ],
+      "id": "b8270bf7-3f36-4907-b3ea-3f23ecf3e29c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "txBQoMji0bQHLG2W",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        208
+      ],
+      "id": "a3c7ea2b-c78f-4c8c-b460-633ecf02496e",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        416,
+        240
+      ],
+      "id": "c4db1057-5776-4f98-883c-de58f2b86d41",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {
+        "language": "python"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolCode",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        368
+      ],
+      "id": "49c78f7f-900f-4459-94b7-f491e0020a7b",
+      "name": "Code Tool"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        528,
+        320
+      ],
+      "id": "195a5a59-ef03-48fb-91a7-e1cff6f2416f",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.5,
+      "position": [
+        560,
+        176
+      ],
+      "id": "ddd30dcd-ad4d-4f74-a6bf-2149a4af637c",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "tableName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        592,
+        16
+      ],
+      "id": "315b4a8b-0df5-4a87-9b7a-6edf4263e853",
+      "name": "Supabase Vector Store"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "ai_tool": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

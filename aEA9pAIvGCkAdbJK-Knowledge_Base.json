@@ -1,0 +1,102 @@
+{
+  "name": "Knowledge Base",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a81d6fad-9b96-4c37-90d8-79991fa344c5",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1zLsSRsLcgpch8EocZ8E0W3hvRVu3ltyo3G4sfBcIV4w",
+          "mode": "list",
+          "cachedResultName": "Knowledge Base",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zLsSRsLcgpch8EocZ8E0W3hvRVu3ltyo3G4sfBcIV4w/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Product Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zLsSRsLcgpch8EocZ8E0W3hvRVu3ltyo3G4sfBcIV4w/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": []
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d321e37d-19ea-48cc-84eb-68c1ae016427",
+      "name": "Knowledge Base",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aFHcdrCC061RZaz2",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "pythonNative",
+        "pythonCode": "rows = _items\n\nknowledge = []\n\nfor item in rows:\n    data = item[\"json\"]\n\n    product = (\n        f\"Product ID: {data.get('Product_ID', '')}\\n\"\n        f\"Product Name: {data.get('Product_Name', '')}\\n\"\n        f\"Category: {data.get('Category', '')}\\n\"\n        f\"Material: {data.get('Material', '')}\\n\"\n        f\"City: {data.get('City', '')}\\n\"\n        f\"Stock Quantity: {data.get('Stock_Qty', '')}\\n\"\n        f\"Unit Price: {data.get('Unit_Price', '')}\\n\"\n        f\"Sales Quantity: {data.get('Sales_Qty', '')}\\n\"\n        f\"Supplier: {data.get('Supplier', '')}\\n\"\n        f\"Stock Status: {data.get('Stock_Status', '')}\"\n    )\n\n    knowledge.append(product)\n\nknowledge_text = \"\\n\\n--- PRODUCT ---\\n\\n\".join(knowledge)\n\nreturn [\n    {\n        \"json\": {\n            \"source\": \"Knowledge Base\",\n            \"knowledge\": knowledge_text,\n            \"total_products\": len(rows)\n        }\n    }\n]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "d40e9642-4fca-423c-a01e-e8ba1881ef74",
+      "name": "Code in Python"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Knowledge Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Base": {
+      "main": [
+        [
+          {
+            "node": "Code in Python",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

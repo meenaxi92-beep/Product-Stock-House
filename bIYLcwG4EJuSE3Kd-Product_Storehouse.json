@@ -1,0 +1,347 @@
+{
+  "name": "Product Storehouse",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c88a328e-2c2d-4ce5-abe3-d08c51733e7b",
+      "name": "When chat message received",
+      "webhookId": "87555620-8e9e-4404-9121-5bd64128f0b5"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "This knowledge base contains inventory and sales information for a furniture and home décor business. The dataset includes 20 products across the categories Seating, Tables, Storage, and Lighting. Each product has a unique Product ID, product name, category, material, city, current stock quantity, unit price, sales quantity, supplier, and stock status. The products are supplied by vendors such as Aria Furnishings, WoodCraft Co., Urban Living, Natural Nest, Heritage Woods, Luxe Home, StoneCraft, and LightHouse Studio. The inventory covers multiple cities including Jodhpur, Jaipur, Delhi, Mumbai, and Bengaluru. Stock status is classified as In Stock, Low Stock, or Overstock based on the available quantity. Products with stock quantities below 30 units are considered low-stock items and may require reordering. The dataset can be used to analyze inventory levels, sales performance, stock value, sales value, product categories, supplier performance, city-wise inventory, and potential reorder requirements. Sales Value can be calculated by multiplying Sales Quantity by Unit Price, while Stock Value can be calculated by multiplying Stock Quantity by Unit Price. The data can be used by an AI assistant to answer questions such as which products need reordering, which products have the highest sales, which category performs best, which suppliers provide the most products, which products are overstocked, and what the overall inventory situation looks like.\n\nAfter providing the final answer, use the `Log_Generator` tool to record the interaction in the Logs worksheet. Pass the user's original query as **Query** and the complete AI-generated answer as **Response**. The tool automatically records the **Timestamp**. Use this tool only for logging completed interactions and do not use it to retrieve or generate information."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "a8f09f38-5040-44b4-98bb-f8c7792a1044",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.6-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        208
+      ],
+      "id": "14d6dcef-6490-44de-b747-06a5e309ff4b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "txBQoMji0bQHLG2W",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        208
+      ],
+      "id": "f01120d3-eb63-4667-994a-77f28b50ac78",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        384,
+        208
+      ],
+      "id": "5b6048f3-9419-4006-891c-d119cf32396c",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        480,
+        304
+      ],
+      "id": "93c81bb1-396c-4672-8c32-3afda7c349bd",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "description": "Use this tool to retrieve product stock and inventory information from the Google Sheet named \"Knowledge Base\". The sheet contains product details including Product ID, Product Name, Category, Material, City, Stock Quantity, Unit Price, Sales Quantity, Supplier, and Stock Status.\n\nUse this tool whenever the user asks about product availability, current stock, low-stock products, overstocked products, products requiring reorder, inventory by category or city, supplier information, sales quantity, product prices, or other questions that require information from the stock database.\n\nAlways retrieve the relevant data from this tool rather than assuming or inventing stock information. Use the returned data to provide accurate, concise answers to the user's inventory-related questions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "aEA9pAIvGCkAdbJK",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/aEA9pAIvGCkAdbJK",
+          "cachedResultName": "Knowledge Base"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -128,
+        320
+      ],
+      "id": "7793e1f0-9754-4aed-85b2-75c7611061b5",
+      "name": "Call 'Knowledge Base'"
+    },
+    {
+      "parameters": {
+        "description": "Use this tool to retrieve product stock and inventory information from the Google Sheet named \"Knowledge Base\". The sheet contains product details including Product ID, Product Name, Category, Material, City, Stock Quantity, Unit Price, Sales Quantity, Supplier, and Stock Status.\n\nUse this tool whenever the user asks about product availability, current stock, low-stock products, overstocked products, products requiring reorder, inventory by category or city, supplier information, sales quantity, product prices, or other questions that require information from the stock database.\n\nAlways retrieve the relevant data from this tool rather than assuming or inventing stock information. Use the returned data to provide accurate, concise answers to the user's inventory-related questions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "aEA9pAIvGCkAdbJK",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/aEA9pAIvGCkAdbJK",
+          "cachedResultName": "Knowledge Base"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        576,
+        400
+      ],
+      "id": "fb09bf88-2010-4885-a7a9-fe42ea6c689a",
+      "name": "Call 'Knowledge Base'1"
+    },
+    {
+      "parameters": {
+        "description": "Use this tool to record the user's interaction with the Product Stock House workflow.\n\nThe tool logs each user query and the AI Agent's response into the Logs worksheet of the connected Google Sheet. Use this tool after generating the final response to the user.\n\nPass the user's original query as the Query and the complete final AI response as the Response. The tool automatically records the execution timestamp.\n\nDo not use this tool to answer the user's question or retrieve product information. Its purpose is only to create an interaction log containing Timestamp, Query, and Response.",
+        "workflowId": {
+          "__rl": true,
+          "value": "mTd6lmKNS2hiYaW2",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/mTd6lmKNS2hiYaW2",
+          "cachedResultName": "Logs_Generator"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        416
+      ],
+      "id": "2e5e6bbf-2c2d-4a1a-a82a-c92df87ee011",
+      "name": "Call 'Logs_Generator'"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1zLsSRsLcgpch8EocZ8E0W3hvRVu3ltyo3G4sfBcIV4w",
+          "mode": "list",
+          "cachedResultName": "Knowledge Base",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zLsSRsLcgpch8EocZ8E0W3hvRVu3ltyo3G4sfBcIV4w/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1248744220,
+          "mode": "list",
+          "cachedResultName": "Logs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1zLsSRsLcgpch8EocZ8E0W3hvRVu3ltyo3G4sfBcIV4w/edit#gid=1248744220"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $now }}",
+            "Query": "={{ $('When chat message received').item.json.chatInput }}",
+            "Response": "={{ $json.output }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Query",
+              "displayName": "Query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        592,
+        0
+      ],
+      "id": "55f3e1ae-09f0-4a7a-be3c-6edb8f965017",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aFHcdrCC061RZaz2",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Knowledge Base'1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Logs_Generator'": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "pinData": {},
+  "triggerCount": 0,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}
